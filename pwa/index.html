@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Mutasi Kimia Dyeing</title><meta name="theme-color" content="#1e3a8a">
+<link rel="manifest" href="manifest.json"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png">
+<style>
+:root{--b:#1d4ed8;--bd:#1e3a8a;--bg:#f8fafc;--t:#0f172a;--m:#64748b;--l:#e2e8f0;--ok:#059669;--w:#d97706;--e:#e11d48}
+*{box-sizing:border-box}body{margin:0;font:14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--t);height:100vh;display:flex;flex-direction:column}
+header{background:linear-gradient(90deg,var(--bd),var(--b));color:#fff;padding:10px 12px;padding-top:max(10px,env(safe-area-inset-top));display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.ttl{flex:1;min-width:140px}.ttl b{display:block;font-size:15px}.ttl small{opacity:.8;font-size:11px}
+header select,header button{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:10px;padding:6px 10px;font:inherit}
+header option{color:#000}.spin{animation:s 1s linear infinite}@keyframes s{to{transform:rotate(360deg)}}
+.badge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:99px;color:#fff}.badge.ok{background:var(--ok)}.badge.w{background:var(--w)}
+#banner{background:#fff1f2;color:#9f1239;padding:8px 12px;font-size:12px;border-bottom:1px solid #fecdd3}
+main{flex:1;overflow-y:auto;padding:12px 12px 84px;max-width:1100px;width:100%;margin:0 auto}
+h3{margin:18px 0 8px;font-size:13px;color:var(--m)}.m{color:var(--m)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+.kpi{background:#fff;border:1px solid var(--l);border-radius:14px;padding:10px 12px}.kpi small{color:var(--m);display:block}.kpi b{font-size:20px}.kpi i{color:var(--m);font-style:normal;margin-left:4px;font-size:11px}
+.kpi.ok b{color:var(--ok)}.kpi.w b{color:var(--w)}
+.trend{display:flex;gap:3px;height:120px;align-items:flex-end;overflow-x:auto;background:#fff;border:1px solid var(--l);border-radius:14px;padding:10px 8px 4px}
+.tb{flex:0 0 22px;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;cursor:pointer}
+.tb span{width:100%;background:#93c5fd;border-radius:4px 4px 0 0;min-height:2px}.tb.on span{background:var(--b)}.tb em{font-size:9px;color:var(--m);font-style:normal;margin-top:2px}
+.hb{display:grid;grid-template-columns:minmax(90px,38%) 1fr auto;gap:8px;align-items:center;margin:5px 0;font-size:12px}
+.hb>div:nth-child(2){background:#e2e8f0;border-radius:99px;height:8px;overflow:hidden}.hb span{display:block;height:100%;background:var(--b);border-radius:99px}.hb div:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}.bar input{flex:1;min-width:150px}
+input,select{padding:8px 10px;border:1px solid var(--l);border-radius:10px;font:inherit;background:#fff}
+.tw{overflow:auto;background:#fff;border:1px solid var(--l);border-radius:14px;max-height:calc(100vh - 230px)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:12px}th,td{padding:7px 8px;text-align:right;border-bottom:1px solid var(--l);white-space:nowrap}
+th{position:sticky;top:0;background:#eff6ff;cursor:pointer;z-index:1}td:first-child,th:first-child{text-align:left;position:sticky;left:0;background:inherit}td:first-child{background:#fff;white-space:normal;min-width:170px}
+td:nth-child(2),th:nth-child(2){text-align:left}td small{display:block;color:var(--m);font-size:10px}.e{color:var(--e);font-weight:700}
+tfoot td{position:sticky;bottom:0;background:#eff6ff!important;font-weight:700}
+.ci{background:#fff;border:1px solid var(--l);border-left:4px solid var(--w);border-radius:10px;padding:8px 12px;margin:6px 0}.ci small{color:var(--m);margin-left:8px}.ci p{margin:4px 0 0;font-size:12px}
+nav{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-top:1px solid var(--l);display:flex;padding-bottom:env(safe-area-inset-bottom)}
+nav button{flex:1;border:0;background:none;padding:9px 0 7px;color:var(--m);font:inherit;font-size:11px;font-weight:600}nav button.on{color:var(--b)}nav button span{display:block;font-size:19px}
+.set label{display:block;margin:12px 0 4px;font-weight:600}.set input{width:100%}.set button{margin:8px 6px 0 0;padding:8px 14px;border-radius:10px;border:1px solid var(--b);background:var(--b);color:#fff;font:inherit}.set button.g{background:#fff;color:var(--b)}
+[hidden]{display:none!important}
+</style></head><body>
+<header>
+ <div class="ttl"><b>Mutasi Kimia Dyeing</b><small id="upd">Memuat…</small></div>
+ <span id="badge" class="badge w">…</span>
+ <select id="per" aria-label="Periode"></select>
+ <button id="unit" title="Ganti satuan">kg</button><button id="sync" title="Sinkron">⟳</button>
+</header>
+<div id="banner" hidden><b>Koneksi gagal.</b> <span id="bmsg"></span> <a href="#" onclick="go('set');return false">Pengaturan</a></div>
+<main>
+<section id="t-dash"><div id="kpi" class="kpis"></div><h3>Tren pemakaian per bulan (ketuk batang untuk pilih periode)</h3><div id="trend" class="trend"></div><h3>10 pemakaian terbesar</h3><div id="top"></div><h3>Pemakaian per jenis</h3><div id="jen"></div></section>
+<section id="t-mut" hidden><div class="bar"><input id="q" type="search" placeholder="Cari nama / kode…"><select id="jn"></select><select id="st"><option value="">Semua</option><option value="habis">Stok habis</option><option value="cek">Perlu dicek</option></select></div><div class="tw"><table id="tb"></table></div></section>
+<section id="t-cek" hidden><p class="m">Stok Akhir seharusnya = Awal + Pemasukan − Pemakaian − Return. <b id="cekn"></b> <span id="dupn"></span></p><div id="cek"></div></section>
+<section id="t-set" class="set" hidden>
+ <label for="url">URL Web App (Apps Script)</label><input id="url">
+ <button id="save">Simpan</button><button id="rst" class="g">Pakai URL bawaan</button><button id="test" class="g">Tes API</button><button id="inst" class="g" hidden>Pasang aplikasi</button>
+ <p class="m">Data terakhir tersimpan di perangkat sehingga tetap bisa dibuka saat offline.</p>
+</section>
+</main>
+<nav>
+ <button data-t="dash" class="on"><span>📊</span>Dashboard</button><button data-t="mut"><span>📋</span>Mutasi</button>
+ <button data-t="cek"><span>⚠️</span>Cek Data</button><button data-t="set"><span>⚙️</span>Setting</button>
+</nav>
+<script>
+const DEF_URL='https://script.google.com/macros/s/AKfycbxK09Ww1fevjANl6o24TCJzcjuG6N2yvi0LB8_LpLo-DNiQ5I64Q4LWVYmgSFJjmx9Q/exec';
+const $=id=>document.getElementById(id),MON=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+let D=[],P='',DUP=0,U=localStorage.mk_u||'kg',tab='dash',sk='',sd=1;
+const apiUrl=()=>localStorage.mk_url||DEF_URL;
+const f=v=>v==null?'-':(U==='kg'?v/1000:v).toLocaleString('id-ID',{maximumFractionDigits:2});
+const pl=p=>{const[y,m]=p.split('-');return MON[m-1]+' '+y};
+const sum=(a,k)=>a.reduce((s,o)=>s+o[k],0);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const bad=o=>Math.abs(o.sel)>1||(o.beda!=null&&Math.abs(o.beda)>1);
+const hb=a=>{const m=Math.max(...a.map(x=>x[1]),1);return a.map(([l,v])=>`<div class="hb"><div title="${esc(l)}">${esc(l)}</div><div><span style="width:${v/m*100}%"></span></div><b>${f(v)}</b></div>`).join('')||'<p class="m">Tidak ada data</p>'};
+
+function got(r,live){
+  D=r.data||[];DUP=r.dup||0;const ps=[...new Set(D.map(o=>o.p))].sort();
+  $('per').innerHTML=ps.slice().reverse().map(p=>`<option value="${p}">${pl(p)}</option>`).join('');
+  if(!ps.includes(P))P=ps[ps.length-1]||'';$('per').value=P;
+  $('badge').textContent=live?'LIVE':'CACHE';$('badge').className='badge '+(live?'ok':'w');
+  $('upd').textContent=(r.updated?'Diperbarui '+new Date(r.updated).toLocaleString('id-ID'):'')+' · '+D.length+' baris';
+  $('banner').hidden=live;render();
+}
+function load(){
+  const s=$('sync');s.classList.add('spin');
+  const ok=r=>{s.classList.remove('spin');if(r.status!=='success')return fail(r.message||'Gagal membaca sheet');try{localStorage.mk_data=JSON.stringify(r)}catch(e){}got(r,true)};
+  const fail=m=>{s.classList.remove('spin');const c=localStorage.mk_data;if(c)got(JSON.parse(c),false);else{D=[];render()}$('banner').hidden=false;$('bmsg').textContent=m+(c?' Menampilkan data tersimpan.':'')};
+  if(window.google&&google.script&&google.script.run)return google.script.run.withSuccessHandler(ok).withFailureHandler(e=>fail(e.message)).apiData();
+  const u=apiUrl();fetch(u+(u.includes('?')?'&':'?')+'action=getData&t='+Date.now()).then(r=>r.text()).then(t=>{let j;try{j=JSON.parse(t)}catch(e){throw new Error('Respons bukan JSON. Pastikan Web App di-deploy dengan akses "Anyone".')}ok(j)}).catch(e=>fail(e.message));
+}
+function render(){$('unit').textContent=U;({dash:rDash,mut:rMut,cek:rCek,set:()=>{}})[tab]()}
+function rDash(){
+  const R=D.filter(o=>o.p===P);
+  $('kpi').innerHTML=[['Stok Akhir','akhir',''],['Pemasukan','masuk','ok'],['Pemakaian','pakai','w'],['Return','ret','']].map(([l,k,c])=>`<div class="kpi ${c}"><small>${l}</small><b>${f(sum(R,k))}</b><i>${U}</i></div>`).join('');
+  const ps=[...new Set(D.map(o=>o.p))].sort(),tv=ps.map(p=>sum(D.filter(o=>o.p===p),'pakai')),mx=Math.max(...tv,1);
+  $('trend').innerHTML=ps.map((p,i)=>`<div class="tb${p===P?' on':''}" onclick="pick('${p}')" title="${pl(p)}: ${f(tv[i])} ${U}"><span style="height:${tv[i]/mx*90}%"></span><em>${p.slice(5)}</em></div>`).join('');
+  $('top').innerHTML=hb(R.slice().sort((a,b)=>b.pakai-a.pakai).slice(0,10).filter(o=>o.pakai>0).map(o=>[o.nama,o.pakai]));
+  const g={};R.forEach(o=>g[o.jenis]=(g[o.jenis]||0)+o.pakai);
+  $('jen').innerHTML=hb(Object.entries(g).sort((a,b)=>b[1]-a[1]));
+}
+function rMut(){
+  const q=$('q').value.toLowerCase(),j=$('jn').value,s=$('st').value,all=D.filter(o=>o.p===P);
+  const js=[...new Set(all.map(o=>o.jenis))].sort();
+  if($('jn').dataset.p!==P){$('jn').innerHTML='<option value="">Semua jenis</option>'+js.map(x=>`<option>${esc(x)}</option>`).join('');$('jn').dataset.p=P}
+  let R=all.filter(o=>(!q||(o.nama+o.kode).toLowerCase().includes(q))&&(!j||o.jenis===j)&&(s!=='habis'||o.akhir<=0)&&(s!=='cek'||bad(o)));
+  if(sk)R.sort((a,b)=>(typeof a[sk]==='string'?a[sk].localeCompare(b[sk]):a[sk]-b[sk])*sd);
+  const C=[['nama','Nama'],['jenis','Jenis'],['awal','Awal'],['masuk','Masuk'],['pakai','Pakai'],['ret','Return'],['akhir','Akhir']];
+  $('tb').innerHTML=`<thead><tr>${C.map(([k,l])=>`<th data-k="${k}">${l}${sk===k?(sd>0?' ▲':' ▼'):''}</th>`).join('')}</tr></thead><tbody>`+
+   R.map(o=>`<tr><td>${esc(o.nama)}<small>${esc(o.kode)}${o.cat?' · '+esc(o.cat):''}</small></td><td>${esc(o.jenis)}</td><td>${f(o.awal)}</td><td>${f(o.masuk)}</td><td>${f(o.pakai)}</td><td>${f(o.ret)}</td><td class="${o.akhir<=0?'e':''}">${f(o.akhir)}${bad(o)?' ⚠️':''}</td></tr>`).join('')+
+   `</tbody><tfoot><tr><td>Total (${R.length}) · ${U}</td><td></td>${['awal','masuk','pakai','ret','akhir'].map(k=>`<td>${f(sum(R,k))}</td>`).join('')}</tr></tfoot>`;
+  $('tb').querySelectorAll('th').forEach(th=>th.onclick=()=>{sd=sk===th.dataset.k?-sd:1;sk=th.dataset.k;rMut()});
+}
+function rCek(){
+  const L=D.filter(bad).reverse();$('cekn').textContent=L.length+' temuan.';$('dupn').textContent=DUP?DUP+' baris ganda (salinan periode lama) diabaikan.':'';
+  $('cek').innerHTML=L.slice(0,300).map(o=>{const m=[];
+    if(Math.abs(o.sel)>1)m.push(`Stok akhir tercatat ${f(o.akhir)}, hitungan ${f(o.akhir-o.sel)} (selisih ${f(o.sel)} ${U})`);
+    if(o.beda!=null&&Math.abs(o.beda)>1)m.push(`Stok awal berbeda ${f(o.beda)} ${U} dari stok akhir bulan sebelumnya`);
+    return`<div class="ci"><b>${esc(o.nama)}</b><small>${pl(o.p)}</small><p>${m.join('<br>')}</p></div>`}).join('')||'<p>Tidak ada temuan 🎉</p>';
+}
+function go(t){tab=t;document.querySelectorAll('main>section').forEach(s=>s.hidden=s.id!=='t-'+t);document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));if(t==='set')$('url').value=apiUrl();render()}
+function pick(p){P=p;$('per').value=p;render()}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>go(b.dataset.t));
+$('per').onchange=e=>pick(e.target.value);$('q').oninput=rMut;$('jn').onchange=rMut;$('st').onchange=rMut;$('sync').onclick=load;
+$('unit').onclick=()=>{U=U==='kg'?'gram':'kg';localStorage.mk_u=U;render()};
+$('save').onclick=()=>{localStorage.mk_url=$('url').value.trim();load();go('dash')};
+$('rst').onclick=()=>{localStorage.removeItem('mk_url');$('url').value=DEF_URL};
+$('test').onclick=()=>window.open(apiUrl()+'?action=getData','_blank');
+let dp;addEventListener('beforeinstallprompt',e=>{e.preventDefault();dp=e;$('inst').hidden=false});$('inst').onclick=()=>dp&&dp.prompt();
+if('serviceWorker' in navigator&&/^https?:/.test(location.protocol)&&!(window.google&&google.script))navigator.serviceWorker.register('sw.js').catch(()=>{});
+if(U!=='kg'&&U!=='gram')U='kg';
+load();
+</script></body></html>
